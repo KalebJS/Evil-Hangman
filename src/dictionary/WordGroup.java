@@ -1,5 +1,7 @@
 package dictionary;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 public class WordGroup {
@@ -35,5 +37,20 @@ public class WordGroup {
 
     public Vector<String> getWords() {
         return words;
+    }
+
+    public Set<String> getWordSet() {
+        Set<String> wordSet = new HashSet<>();
+        wordSet.addAll(words);
+        return wordSet;
+    }
+
+    public boolean containsLetter(char letter) {
+        for (boolean letterSetting : configuration) {
+            if (letterSetting) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -5,18 +5,17 @@ import hangman.EmptyDictionaryException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Vector;
 
 public class Dictionary {
-    private Vector<String> words;
-    private int wordLength;
+    private final Vector<String> words;
 
     public Dictionary() {
         words = new Vector<>();
     }
 
     public void readDictionary(File dictionary, int wordLength) throws FileNotFoundException, EmptyDictionaryException {
-        this.wordLength = wordLength;
         Scanner scanner = new Scanner(dictionary);
 
         while (scanner.hasNext()) {
@@ -32,7 +31,7 @@ public class Dictionary {
         }
     }
 
-    public boolean tryLetter(char letter) {
+    private Vector<WordGroup> generateWordGroups(char letter) {
         Vector<WordGroup> wordGroups = new Vector<>();
         for (String word : words) {
             Word w = new Word(word, letter);
@@ -47,6 +46,10 @@ public class Dictionary {
                 wordGroups.add(wordGroup);
             }
         }
+        return wordGroups;
+    }
+
+    private WordGroup generateLargestWordGroup(Vector<WordGroup> wordGroups) {
         WordGroup largestGroup = wordGroups.get(0);
         Vector<WordGroup> largestGroupsOfEqualSize = new Vector<>();
         for (WordGroup wordGroup : wordGroups) {
@@ -57,8 +60,16 @@ public class Dictionary {
                 largestGroupsOfEqualSize.add(wordGroup);
             }
         }
+        if (largestGroupsOfEqualSize.size() > 0) {
 
-        return true;
+        }
+        return largestGroup;
+    }
+
+    public WordGroup tryLetter(char letter) {
+        Vector<WordGroup> wordGroups = generateWordGroups(letter);
+        WordGroup largestGroup = generateLargestWordGroup(wordGroups);
+        return largestGroup;
     }
 
 }
