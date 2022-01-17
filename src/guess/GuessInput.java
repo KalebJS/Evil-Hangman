@@ -3,13 +3,9 @@ package guess;
 import java.util.Scanner;
 
 public class GuessInput {
-    Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public GuessInput() {
-         scanner = new Scanner(System.in);
-    }
-
-    public char getGuess() {
+    public static char getGuess() {
         while (true) {
             String input = scanner.next();
             // check if input is a single character
@@ -19,7 +15,8 @@ public class GuessInput {
                     return input.toLowerCase().charAt(0);
                 }
             }
-            System.out.printf("Sorry, there are no %s’s", input);
+            System.out.printf("'%s' is incorrect input. Please try again.\n", input);
+            System.out.print("Enter guess: ");
         }
 
     }
