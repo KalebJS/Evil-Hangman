@@ -67,7 +67,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
     private static String determinePriorityPartition(String id1, String id2) {
         int charCount1 = getNumberOfTrue(id1);
         int charCount2 = getNumberOfTrue(id2);
-        // whichever has less characters in it is the priority partition
+        // whichever has fewer characters in it is the priority partition
         if (charCount1 < charCount2) {
             return id1;
         } else if (charCount1 > charCount2) {
@@ -150,7 +150,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
 
     public String getWord() {
         // get random word from the set of words
-        String[] arrayNumbers = words.toArray(new String[words.size()]);
+        String[] arrayNumbers = words.toArray(new String[0]);
         Random random = new Random();
         int randomIndex = random.nextInt(arrayNumbers.length);
         return arrayNumbers[randomIndex];
